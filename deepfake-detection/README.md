@@ -26,10 +26,27 @@ All commands in this example are run from the `deepfake-detection` folder.
 
 ## Data preparation
 
-The first step will be to generate train and test data samples from the [Kaggle challenge source](https://www.kaggle.com/c/deepfake-detection-challenge/data).
-Click on the link, sign-up or login to Kaggle and download the data samples (Dowload All button)
-then copy-paste train_samples_videos in the data/DFDC folder of the example
+### Download the data
+The first step will be to download the data from the [Kaggle challenge source](https://www.kaggle.com/c/deepfake-detection-challenge/data)
 
+* Sign-up or login to [Kaggle](https://www.kaggle.com/) and accept the [competitions rules](https://www.kaggle.com/c/deepfake-detection-challenge/rules).
+* Download the data samples (4Go) manually (`Download All` at the bottom of the [data section](https://www.kaggle.com/c/deepfake-detection-challenge/data)), or install & configure the [Kaggle API](https://github.com/Kaggle/kaggle-api) and execute the following command:
+
+  ```sh
+  kaggle competitions download -c deepfake-detection-challenge
+  ```
+
+* Extract the zip file and copy-paste the 'train_sample_videos' folder in the data/DFDC folder of the example.
+
+```sh
+mkdir -p data/DFDC
+unzip deepfake-detection-challenge.zip 'train_sample_videos/*' -d data/DFDC
+rm deepfake-detection-challenge.zip
+```
+
+### Generate data samples
+
+The second step will be to generate train and test data samples from the [Kaggle challenge source](https://www.kaggle.com/c/deepfake-detection-challenge/data).
 To generate the data samples, run:
 
 ```sh
@@ -39,8 +56,8 @@ python scripts/generate_data_samples.py
 
 This will create two sub-folders in the `assets` folder:
 
-* `train_data` contains train data features and labels as numpy array files
-* `test_data` contains test data features and labels as numpy array files
+* `train_data_samples` contains train data features (paths of the videos) and labels as numpy array files
+* `test_data_samples` contains test data features (paths of the videos) and labels as numpy array files
 
 ## Writing the objective and data manager
 
@@ -52,7 +69,7 @@ These classes provide a simple yet rigid structure that will make algorithms pre
 
 ## Writing a simple algorithm
 
-You'll find under `assets/algo_inference` an implementation of the inference model from the [inference demo Kaggle notebook](https://www.kaggle.com/humananalog/inference-demo). Like the metrics and opener scripts, it relies on a
+You'll find under `assets/algo_inference` an implementation of the `inference` model from the [inference demo Kaggle notebook](https://www.kaggle.com/humananalog/inference-demo). Like the metrics and opener scripts, it relies on a
 class imported from `substratools` that greatly simplifies the writing process. You'll notice that it handles not only
 the train and predict tasks but also a lot of data preprocessing.
 
@@ -63,7 +80,6 @@ the train and predict tasks but also a lot of data preprocessing.
 #### Training task
 
 ```sh
-
 #for a quicker test, you can change --data-samples-path to a specific data sample
 
 python assets/algo/algo_inference.py train \
