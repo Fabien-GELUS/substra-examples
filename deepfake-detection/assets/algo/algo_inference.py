@@ -154,7 +154,7 @@ class Algo(tools.algo.Algo):
             result on test_data_samples when trained on all train_data_damples: 0.5779 
             result on test_data_samples when trained 2* on all train_data_damples: 0.5733 (on cpu: Elapsed 4918.225055 sec. Average per video: 15.369453 sec)
             """
-            self.fc = nn.Linear(2048, 1000)
+            model.fc = nn.Linear(2048, 1000)
             checkpoint = torch.load("assets/algo/deepfakes-inference-demo/resnext50_32x4d-7cdf4587.pth")
             model.load_state_dict(checkpoint)
             # Override the existing FC layer with a new one.
