@@ -27,6 +27,7 @@ All commands in this example are run from the `deepfake-detection` folder.
 ## Data preparation
 
 ### Download the data
+
 The first step will be to download the data from the [Kaggle challenge source](https://www.kaggle.com/c/deepfake-detection-challenge/data)
 
 * Sign-up or login to [Kaggle](https://www.kaggle.com/) and accept the [competitions rules](https://www.kaggle.com/c/deepfake-detection-challenge/rules).
@@ -82,14 +83,14 @@ the train and predict tasks but also a lot of data preprocessing.
 ```sh
 #for a quicker test, you can change --data-samples-path to a specific data sample
 
-python assets/algo/algo_inference.py train \
+python assets/algo_inference/algo.py train \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/train_data_samples \
   --output-model-path assets/model/model \
   --log-path assets/logs/train.log
 
-python assets/algo/algo_inference.py predict \
+python assets/algo_inference/algo.py predict \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/train_data_samples \
@@ -111,8 +112,7 @@ python assets/objective/metrics.py \
 #### Testing task
 
 ```sh
-
-python assets/algo/algo_inference.py predict \
+python assets/algo_inference/algo.py predict \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/test_data_samples \
@@ -143,8 +143,8 @@ substra run-local assets/algo_inference \
   --train-opener=assets/dataset/opener.py \
   --test-opener=assets/dataset/opener.py \
   --metrics=assets/objective/ \
-  --train-data-samples=assets/train_data \
-  --test-data-samples=assets/test_data
+  --train-data-samples=assets/train_data_samples \
+  --test-data-samples=assets/test_data_samples
 ```
 
 At the end of this step, you'll find in the newly created `sandbox/model` folder a `model` file that contains your
