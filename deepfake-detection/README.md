@@ -165,7 +165,7 @@ It's more than probable that your code won't run perfectly the first time. Since
 debug using prints. Instead, you should use the `logging` module from python. All logs can then be consulted at the end
 of the run in  `sandbox/model/log_model.log`.
 
-## TODO: Adding the assets to substra
+## Adding the assets to substra
 
 ### Adding the objective, dataset and data samples to substra
 
